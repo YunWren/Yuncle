@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, onMounted, onUnmounted, defineExpose, reactive, watch } from 'vue'
+import { ref, defineProps, defineEmits, onMounted, onUnmounted, defineExpose, watch } from 'vue'
 import EasyMDE, { Options } from 'easymde'
-import Message from './Message.vue'
 interface EditorProps {
   modelValue?:string,
   options?:Options

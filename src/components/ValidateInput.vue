@@ -1,5 +1,5 @@
 <script lang="ts">
-import { reactive, PropType, defineProps, defineEmits, defineOptions, onMounted, computed, watch } from 'vue'
+import { reactive, PropType, defineProps, defineEmits, defineOptions, onMounted, computed } from 'vue'
 import { emitter } from './ValidateForm.vue'
 export interface RuleProp {
   type:'required' | 'email' |'password'|'custom';

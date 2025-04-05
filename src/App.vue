@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, computed, onMounted, watch } from 'vue'
+import { defineComponent, computed, watch } from 'vue'
 import GlobalHeader from './components/GloballHeader.vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useStore } from 'vuex'
