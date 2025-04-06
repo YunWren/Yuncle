@@ -17,6 +17,7 @@
     "markdown-it": "^14.1.0",
     "mitt": "^3.0.1",
     "pinia": "^2.3.0",
+    "tslib": "^2.8.1",
     "vue": "^3.5.13",
     "vue-router": "^4.0.13",
     "vuex": "^4.0.2"
@@ -27,9 +28,9 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-service": "^3.3.1",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-standard": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "eslint": "^8.0.1",
@@ -38,7 +39,11 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^8.0.1",
     "typescript": "^5.7.3",
-    "webpack-cli": "^5.1.4"
+    "vue": "^3.5.13",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.15.2",
+    "webpack-merge": "^5.10.0"
   },
   "eslintConfig": {
     "root": true,
@@ -65,5 +70,8 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "compilerOptions": {
+    "importHelpers": true
+  }
 }
