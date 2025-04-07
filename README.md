@@ -1,6 +1,5 @@
 # Yuncle - 实验室同好分享平台
 
-[![GitHub stars](https://img.shields.io/github/stars/YunWren/campus-circle)](https://github.com/YunWren/campus-circle/stargazers)
 [![Vue](https://img.shields.io/badge/Vue-3.3.4-brightgreen)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0.0-blue)](https://www.typescriptlang.org/)
 
