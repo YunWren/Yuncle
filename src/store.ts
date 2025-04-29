@@ -78,10 +78,10 @@ const store = createStore<GlobalDataProps>({
     // login(state) {
     //   state.user = { ...state.user, isLogin: true, name: 'viking' }
     // },
-    createPost (state, newPost) {
+    createPost(state, newPost) {
       state.posts.data[newPost._id] = newPost
     },
-    fetchColumns (state, rawData) {
+    fetchColumns(state, rawData) {
       const { data } = state.columns
       const { list, count } = rawData.data
       state.columns = {
@@ -90,38 +90,38 @@ const store = createStore<GlobalDataProps>({
         isLoaded: true
       }
     },
-    fetchColumn (state, rawData) {
+    fetchColumn(state, rawData) {
       state.columns.data[rawData.data._id] = rawData.data
     },
-    fetchPosts (state, { data: rawData, extraData: columnId }) {
+    fetchPosts(state, { data: rawData, extraData: columnId }) {
       state.posts.data = { ...state.posts.data, ...arrToObj(rawData.data.list) }
       state.posts.loadedColumns.push(columnId)
     },
-    fetchPost (state, rawData) {
+    fetchPost(state, rawData) {
       state.posts.data[rawData.data._id] = rawData.data
     },
-    deletePost (state, { data }) {
+    deletePost(state, { data }) {
       delete state.posts.data[data._id]
     },
-    updatePost (state, { data }) {
+    updatePost(state, { data }) {
       state.posts.data[data._id] = data
     },
-    setLoading (state, status) {
+    setLoading(state, status) {
       state.loading = status
     },
-    setError (state, e: GlobalErrorProps) {
+    setError(state, e: GlobalErrorProps) {
       state.error = e
     },
-    fetchCurrentUser (state, rawData) {
+    fetchCurrentUser(state, rawData) {
       state.user = { isLogin: true, ...rawData.data }
     },
-    login (state, rawData) {
+    login(state, rawData) {
       const { token } = rawData.data
       state.token = token
       localStorage.setItem('token', token)
       axios.defaults.headers.common.Authorization = `Bearer ${token}`
     },
-    logout (state) {
+    logout(state) {
       state.token = ''
       state.user = { isLogin: false }
       localStorage.removeItem('token')
@@ -129,24 +129,24 @@ const store = createStore<GlobalDataProps>({
     }
   },
   actions: {
-    fetchColumns ({ state, commit }, params = {}) {
+    fetchColumns({ state, commit }, params = {}) {
       const { currentPage = 1, pageSize = 6 } = params
-      // if (!state.columns.isLoaded) {
-      //   return asyncAndCommit('/columns', 'fetchColumns', commit)
-      // }
+      if (!state.columns.isLoaded) {
+        return asyncAndCommit('/columns', 'fetchColumns', commit)
+      }
       return asyncAndCommit(`/columns?currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchColumns', commit)
     },
-    fetchColumn ({ state, commit }, cid) {
+    fetchColumn({ state, commit }, cid) {
       if (!state.columns.data[cid]) {
         return asyncAndCommit(`/columns/${cid}`, 'fetchColumn', commit)
       }
     },
-    fetchPosts ({ state, commit }, cid) {
+    fetchPosts({ state, commit }, cid) {
       if (!state.posts.loadedColumns.includes(cid)) {
         return asyncAndCommit(`/columns/${cid}/posts`, 'fetchPosts', commit, { method: 'get' }, cid)
       }
     },
-    fetchPost ({ state, commit }, id) {
+    fetchPost({ state, commit }, id) {
       const currentPost = state.posts.data[id]
       if (!currentPost || !currentPost.content) {
         return asyncAndCommit(`/posts/${id}`, 'fetchPost', commit)
@@ -154,25 +154,25 @@ const store = createStore<GlobalDataProps>({
         return Promise.resolve({ data: currentPost })
       }
     },
-    updatePost ({ commit }, { id, payload }) {
+    updatePost({ commit }, { id, payload }) {
       return asyncAndCommit(`/posts/${id}`, 'updatePost', commit, {
         method: 'patch',
         data: payload
       })
     },
-    fetchCurrentUser ({ commit }) {
+    fetchCurrentUser({ commit }) {
       return asyncAndCommit('/user/current', 'fetchCurrentUser', commit)
     },
-    login ({ commit }, payload) {
+    login({ commit }, payload) {
       return asyncAndCommit('/user/login', 'login', commit, { method: 'post', data: payload })
     },
-    createPost ({ commit }, payload) {
+    createPost({ commit }, payload) {
       return asyncAndCommit('/posts', 'createPost', commit, { method: 'post', data: payload })
     },
-    deletePost ({ commit }, id) {
+    deletePost({ commit }, id) {
       return asyncAndCommit(`/posts/${id}`, 'deletePost', commit, { method: 'delete' })
     },
-    loginAndFetch ({ dispatch }, loginData) {
+    loginAndFetch({ dispatch }, loginData) {
       return dispatch('login', loginData).then(() => {
         return dispatch('fetchCurrentUser')
       })
