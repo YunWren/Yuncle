@@ -1,16 +1,10 @@
-import { Commit, createStore } from 'vuex'
+import { createStore, Commit } from 'vuex'
 import axios, { AxiosRequestConfig } from 'axios'
 import { arrToObj, objToArr } from './helper'
-export interface ResponseType<P = object> {
-  code: number,
-  msg: string,
-  data: P,
-}
-export interface ImageProps {
-  _id?: string,
-  url?: string,
-  createdAt?: string
-  fitUrl?: string
+export interface ResponseType<P = {}> {
+  code: number;
+  msg: string;
+  data: P;
 }
 export interface UserProps {
   isLogin: boolean;
@@ -21,24 +15,29 @@ export interface UserProps {
   avatar?: ImageProps;
   description?: string;
 }
+export interface ImageProps {
+  _id?: string;
+  url?: string;
+  createdAt?: string;
+  fitUrl?: string;
+}
 export interface ColumnProps {
-  _id: string,
-  title: string,
-  avatar?: ImageProps,
-  description: string,
+  _id: string;
+  title: string;
+  avatar?: ImageProps;
+  description: string;
 }
 export interface PostProps {
-  _id?: string,
-  title: string,
-  excerpt?: string,
-  content?: string,
-  image?: ImageProps | string,
-  createdAt?: string,
-  column: string,
+  _id?: string;
+  title: string;
+  excerpt?: string;
+  content?: string;
+  image?: ImageProps | string;
+  createdAt?: string;
+  column: string;
   author?: string | UserProps;
   isHTML?: boolean;
 }
-
 interface ListProps<P> {
   [id: string]: P;
 }
@@ -46,7 +45,6 @@ export interface GlobalErrorProps {
   status: boolean;
   message?: string;
 }
-
 export interface GlobalDataProps {
   token: string;
   error: GlobalErrorProps;
@@ -124,16 +122,16 @@ const store = createStore<GlobalDataProps>({
     logout(state) {
       state.token = ''
       state.user = { isLogin: false }
-      localStorage.removeItem('token')
+      localStorage.remove('token')
       delete axios.defaults.headers.common.Authorization
     }
   },
   actions: {
     fetchColumns({ state, commit }, params = {}) {
       const { currentPage = 1, pageSize = 6 } = params
-      if (!state.columns.isLoaded) {
-        return asyncAndCommit('/columns', 'fetchColumns', commit)
-      }
+      // if (!state.columns.isLoaded) {
+      //   return asyncAndCommit('/columns', 'fetchColumns', commit)
+      // }
       return asyncAndCommit(`/columns?currentPage=${currentPage}&pageSize=${pageSize}`, 'fetchColumns', commit)
     },
     fetchColumn({ state, commit }, cid) {

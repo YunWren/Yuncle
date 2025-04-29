@@ -8,7 +8,6 @@ export function generateFitUrl(data: ImageProps, width: number, height: number, 
     data.fitUrl = data.url + `?x-oss-process=image/resize,${formatStr}h_${height},w_${width}`
   }
 }
-
 export function addColumnAvatar(data: ColumnProps | UserProps, width: number, height: number) {
   if (data.avatar) {
     generateFitUrl(data.avatar, width, height)

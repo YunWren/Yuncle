@@ -1,9 +1,12 @@
 <script lang="ts">
 import mitt from 'mitt'
-import { defineEmits, onUnmounted } from 'vue'
+import { defineEmits, onUnmounted, defineComponent } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 const emitter = mitt()
 export { emitter }
+export default defineComponent({
+  // 组件配置
+})
 </script>
 <script setup lang="ts">
 const emit = defineEmits(['form-submit'])

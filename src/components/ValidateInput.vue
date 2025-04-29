@@ -1,6 +1,9 @@
 <script lang="ts">
-import { reactive, PropType, defineProps, defineEmits, defineOptions, onMounted, computed, watch } from 'vue'
+import { reactive, PropType, defineProps, defineEmits, defineOptions, onMounted, computed, defineComponent } from 'vue'
 import { emitter } from './ValidateForm.vue'
+export default defineComponent({
+  // 组件配置
+})
 export interface RuleProp {
   type:'required' | 'email' |'password'|'custom';
   message: string;
@@ -8,6 +11,7 @@ export interface RuleProp {
 }
 export type RulesProp = RuleProp[]
 export type TagType = 'input' | 'textarea'
+
 </script>
 
 <script lang="ts" setup>
